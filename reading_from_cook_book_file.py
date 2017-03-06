@@ -7,7 +7,6 @@ with open('cook_book.txt') as dishes_list:  # Добавляем названи�
         cook_book[dish_name] = []
         ingridients_quantity = int(dishes_list.readline().strip())
         for ingridient in range(ingridients_quantity):
-            cook_book[dish_name].append(ingridient_name)
             ingridient = dishes_list.readline().split(' | ')
             cook_book_new['ingridient_name'] = ingridient[0]
             cook_book_new['quantity'] = ingridient[1]
