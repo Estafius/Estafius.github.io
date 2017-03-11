@@ -1,21 +1,22 @@
-cook_book = {}
-cook_book_new = {}
-
-with open('cook_book.txt') as dishes_list:  # Добавляем название блюда в словарь и читаем ингридиенты
+def cook_book_from_file():
+ cook_book = {}
+ cook_book_info= {}
+ with open('cook_book.txt') as dishes_list:  # Добавляем название блюда в словарь и читаем ингридиенты
     for line in dishes_list:
         dish_name = line.strip()
         cook_book[dish_name] = []
         ingridients_quantity = int(dishes_list.readline().strip())
         for ingridient in range(ingridients_quantity):
             ingridient = dishes_list.readline().split(' | ')
-            cook_book_new['ingridient_name'] = ingridient[0]
-            cook_book_new['quantity'] = ingridient[1]
-            cook_book_new['measure'] = ingridient[2]
+            cook_book_info['ingridient_name'] = ingridient[0]
+            cook_book_info['quantity'] = ingridient[1]
+            cook_book_info['measure'] = ingridient[2]
 
-            cook_book[dish_name].append(cook_book_new.copy())
+            cook_book[dish_name].append(cook_book_info.copy())
+ return cook_book
 
 
-def get_shop_list_by_dishes(dishes, person_count):
+def get_shop_list_by_dishes(dishes, person_count,cook_book):
     shop_list = {}
     for dish in dishes:
         for ingridient in cook_book[dish]:
