@@ -1,23 +1,22 @@
 def cook_book_from_file():
- cook_book = {}
- cook_book_info= {}
- with open('cook_book.txt') as dishes_list:  # Добавляем название блюда в словарь и читаем ингридиенты
-    for line in dishes_list:
-     dish_name = line.strip()
-     cook_book[dish_name] = []
-     if line in ['\n', '\r\n']:
-      continue
-     else:
-      ingridients_quantity = int(dishes_list.readline().strip())
-      for _ in range(ingridients_quantity):
-       ingridient = dishes_list.readline().split(' | ')
-       cook_book_info  = {
-        'ingridient_name':ingridient[0],
-        'quantity':ingridient[1],
-         'measure':ingridient[2]
-        }
-       cook_book.setdefault(dish_name, []).append(cook_book_info)
- return cook_book
+    cook_book = {}
+    with open('cook_book.txt') as dishes_list:
+     for line in dishes_list:
+       dish_name = line.strip()
+       if line in ['\n']:
+        continue
+       else:
+        cook_book[dish_name] = []
+        ingridients_quantity = int(dishes_list.readline().strip())
+        for _ in range(ingridients_quantity):
+         ingridient = dishes_list.readline().split(' | ')
+         cook_book_info  = {
+        'ingridient_name' : ingridient[0],
+        'quantity':   ingridient[1],
+         'measure' :ingridient[2]
+         }
+         cook_book[dish_name].append(cook_book_info)
+     return cook_book
 
 
 def get_shop_list_by_dishes(dishes, person_count,cook_book):
@@ -40,12 +39,12 @@ def print_shop_list(shop_list):
 
 
 def create_shop_list():
- person_count = int(input('Введите количество человек: '))
- dishes = input('Введите блюда в расчете на одного человека (через запятую): ').split(', ')
- print('Рецепт из файла: ')
- cook_book = cook_book_from_file()
- shop_list = get_shop_list_by_dishes(dishes, person_count,cook_book)
- print_shop_list(shop_list)
+    person_count = int(input('Введите количество человек: '))
+    dishes = input('Введите блюда в расчете на одного человека (через запятую): ').split(', ')
+    print('Рецепт из файла: ')
+    cook_book = cook_book_from_file()
+    shop_list = get_shop_list_by_dishes(dishes, person_count,cook_book)
+    print_shop_list(shop_list)
 
 
 create_shop_list()
